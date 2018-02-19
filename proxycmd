@@ -1,0 +1,1 @@
+./cloud_sql_proxy -instances=majestic-legend-193620:us-west1:test-database=tcp:3306
