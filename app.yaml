@@ -9,10 +9,9 @@ resources:
   disk_size_gb: 10
 
 env_variables:
-  SQL_HOST: '35.199.174.8'
   SQL_USER: huhu
   SQL_PASSWORD: password
-  SQL_DATABASE: testdb
+  SQL_DATABASE: ecs193_database
   # e.g. my-awesome-project:us-central1:my-cloud-sql-instance
   INSTANCE_CONNECTION_NAME: majestic-legend-193620:us-west1:test-database
 
