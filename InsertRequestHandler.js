@@ -111,15 +111,15 @@ function insertReading (knex, req, res)
 	knex.schema.hasTable(table_name).then(function (exists) {
 		if(exists)
 		{
-			knex
-				.transaction(function (trx) {
+			//knex
+			//	.transaction(function (trx) {
 					temp.then (function (result) {
 						res.status(200)
 							.set('Content-Type', 'text/plain')
 							.send("All insertions were success.")
 							.end();
 					})
-				})
+			//	})
 				.catch(function (err) {
 					errmsg += err;				
 					res.status(400)
