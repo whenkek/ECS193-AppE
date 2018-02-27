@@ -4,6 +4,7 @@ var Knex = require('knex');
 
 var FetchRequestHandler = require('./FetchRequestHandler.js');
 var InsertRequestHandler = require('./InsertRequestHandler.js');
+var CheckTokenHandler = require('./CheckTokenHandler.js');
 
 var app = express();
 var multer = require('multer');
@@ -89,6 +90,18 @@ app.post('/insert/reading', function (req, res, next) {
         .set('Content-Type', 'text/plain')
         .send('You took a wrong turn somewhere.')
         .end();
+});
+
+app.post('/check/token', jsonParser, function (req, res, next) {
+    if(!req.is('application/json'))
+        return next();
+    CheckTokenHandler.checkToken(knex, req, res);
+});
+
+app.post('/check/token', upload.fields([]), function (req, res, next) {
+    if(!req.is('multipart/form-data'))
+        return next();
+    CheckTokenHandler.checkToken(knex, req, res);
 });
 
 const PORT = process.env.PORT || 8080;
