@@ -16,9 +16,10 @@ app.use(jsonParser);
 
 app.enable('trust proxy');
 
-var knex = Connect()
-
+//UNCOMMENT BEFORE DEPLOY
 process.env.NODE_ENV = 'production';
+
+var knex = Connect()
 
 function Connect ()
 {	
@@ -53,12 +54,39 @@ app.get('/', function (req, res, next) {
         .end();
 });
 
-app.get('/fetch', function (req, res, next) {
-    res.status(200)
-        .set('Content-Type', 'text/plain')
-        .send('In Development')
-        .end();
+//FETCHES
+
+app.post('/fetch/doctors', function (req, res, next) {
+    if (!req.is('application/json'))
+        return next();
+    FetchRequestHandler.fetchDoctors(knex, req, res);
 });
+
+app.post('/fetch/idFromEmail', function (req, res, next) {
+    if (!req.is('application/json'))
+        return next();
+    FetchRequestHandler.fetchIDfromEmail(knex, req, res);
+});
+
+app.post('/fetch/doctorList', function (req, res, next) {
+    if (!req.is('application/json'))
+        return next();
+    FetchRequestHandler.fetchDoctorPatients(knex, req, res);
+});
+
+app.post('/fetch/readings', function (req, res, next) {
+    if (!req.is('application/json'))
+        return next();
+    FetchRequestHandler.fetchReadings(knex, req, res);
+});
+
+app.post('/fetch/doctorReadings', function (req, res, next) {
+    if (!req.is('application/json'))
+        return next();
+    FetchRequestHandler.fetchDoctorReadings(knex, req, res);
+});
+
+//INSERTS
 
 app.post('/insert/doctor', jsonParser, function (req, res, next) {
 	if(!req.is('application/json'))

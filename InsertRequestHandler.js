@@ -83,15 +83,15 @@ function insertReading (knex, req, res)
 	var body = req.body;
 	var resmsg = '';
 	var errmsg = '';
-	console.log(body);
+	//console.log(body);
 	var success = true;
 	var msg = '';
 	var table_name = '';
 	
-	console.log('body: ' + req.body);
+	//console.log('body: ' + req.body);
 	for (var key in body)
 	{
-		console.log('key: ' + key);
+		//console.log('key: ' + key);
 		table_name = key; 
 		if(Array.isArray(body[key]))
 			values = body[key].map(x => JSON.parse(x));
