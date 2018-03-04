@@ -6,7 +6,7 @@ function fetchDoctors (knex, req, res)
 {
     knex
         .select()
-        .from('doctors')
+        .from('faculty')
         .then(function (results) {
             var names = results.map((row) => { return row.name; });
             res.status(200)

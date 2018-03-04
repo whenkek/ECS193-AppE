@@ -6,7 +6,7 @@ function insertPatient (knex, req, res)
 {
 	var data = req.body;
 
-	knex('doctors')
+	knex('faculty')
 		.where('name', data.doctor)
 		.catch((err) => { console.log(err); })
 		.then(function(rows) {
@@ -52,7 +52,8 @@ function insertDoctor (knex, req, res)
 {
 	var data = req.body;
 
-	knex('doctors')
+	/*
+	knex('faculty')
 		.where('name', data.name)
 		.catch((err) => { console.log(err); })
 		.then(function(rows) {
@@ -76,6 +77,7 @@ function insertDoctor (knex, req, res)
 					});
 			}
 		});
+	*/
 }
 
 function insertReading (knex, req, res)
