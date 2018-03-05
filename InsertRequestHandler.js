@@ -1,7 +1,7 @@
 var process = require('process');
 var express = require('express');
 var Knex = require('knex');
-
+/** A List of all avalible data inserting functions for the MySQL database that are avalible on the AppEngine */
 /**
 *	This function processes the POST request and sends a POST to the SQL database to INSERT patients to the appropriate table as well as generating a unique table for said patient.
 *	After sending the data, knex will send a call back returning a HTTP 200 status coded.

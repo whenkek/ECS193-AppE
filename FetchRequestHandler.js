@@ -1,7 +1,7 @@
 var process = require('process');
 var express = require('express');
 var Knex = require('knex');
-
+/** A list of all valid SQL fetching functions avalible on google app engine */
 /**
 *	This function processes the POST request and sends a POST to the SQL database to SELECT doctors from the appropriate table.
 *	After retrieveing the data, knex will send a call back returning a HTTP 200 status code and the data requested.
