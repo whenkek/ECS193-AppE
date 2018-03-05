@@ -10,7 +10,6 @@ var app = express();
 var multer = require('multer');
 var upload = multer();
 
-
 var bodyParser = require('body-parser');
 var jsonParser = bodyParser.json();
 app.use(jsonParser);
@@ -18,7 +17,7 @@ app.use(jsonParser);
 app.enable('trust proxy');
 
 //UNCOMMENT BEFORE DEPLOY
-process.env.NODE_ENV = 'production';
+//process.env.NODE_ENV = 'production';
 
 var knex = Connect()
 
@@ -125,14 +124,10 @@ app.post('/insert/reading', function (req, res, next) {
         .end();
 });
 
+//CHECKS
+
 app.post('/check/token', jsonParser, function (req, res, next) {
     if(!req.is('application/json'))
-        return next();
-    CheckTokenHandler.checkToken(knex, req, res);
-});
-
-app.post('/check/token', upload.fields([]), function (req, res, next) {
-    if(!req.is('multipart/form-data'))
         return next();
     CheckTokenHandler.checkToken(knex, req, res);
 });

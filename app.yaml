@@ -15,6 +15,7 @@ env_variables:
   # e.g. my-awesome-project:us-central1:my-cloud-sql-instance
   INSTANCE_CONNECTION_NAME: majestic-legend-193620:us-west1:test-database
   CLIENT_ID: 671445578517-ogrl80hb1pnq5ruirarvjsmvd8th2hjp.apps.googleusercontent.com
+  CLIENT_ELEC_ID: 671445578517-ju2jvd1beiofp9qqddn3cn6ai1dehmru.apps.googleusercontent.com
 
 
 beta_settings:
