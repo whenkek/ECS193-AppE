@@ -1,19 +1,22 @@
 var process = require('process');
 var express = require('express');
 var Knex = require('knex');
+var mailjet = require('node-mailjet');
+var https = require('https');
 
-function checkToken (knex, req, res) {
+var CLIENT_IDS = [];
+if (process.env.NODE_ENV != 'production')
+{
+    process.env.CLIENT_ID = '671445578517-ogrl80hb1pnq5ruirarvjsmvd8th2hjp.apps.googleusercontent.com';
+    process.env.CLIENT_ELEC_ID = '671445578517-io87npos82nmk6bk24ttgikc9h4uls4l.apps.googleusercontent.com';
+}
+CLIENT_IDS = [process.env.CLIENT_ID, process.env.CLIENT_ELEC_ID, process.env.CLIENT_EMAILER];
+
+function checkUserExists (knex, req, res) 
+{
     console.log('Checking Token...');
 
     var body = req.body;
-
-    var CLIENT_IDS = [];
-    if (process.env.NODE_ENV != 'production')
-    {
-        process.env.CLIENT_ID = '671445578517-ogrl80hb1pnq5ruirarvjsmvd8th2hjp.apps.googleusercontent.com';
-        process.env.CLIENT_ELEC_ID = '671445578517-ju2jvd1beiofp9qqddn3cn6ai1dehmru.apps.googleusercontent.com';
-    }
-    CLIENT_IDS = [process.env.CLIENT_ID, process.env.CLIENT_ELEC_ID];
 
     token = body['idToken'];
 
@@ -21,7 +24,8 @@ function checkToken (knex, req, res) {
     const client = new OAuth2Client(process.env.CLIENT_ID);
 
     async function verify() {
-        try {
+        try 
+        {
             const ticket = await client.verifyIdToken({
                 idToken: token,
                 audience: CLIENT_IDS  // Specify the CLIENT_ID of the app that accesses the backend
@@ -29,8 +33,8 @@ function checkToken (knex, req, res) {
                 //[CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3]
             });
             const payload = ticket.getPayload();
-            console.log(ticket);
-            console.log(payload);
+            //console.log(ticket);
+            //console.log(payload);
             const userid = payload['sub'];
             const email = payload['email'];
 
@@ -109,7 +113,8 @@ function checkToken (knex, req, res) {
                     }
                 });
         }
-        catch(e) {
+        catch(e) 
+        {
             console.log('Auth: FAILURE');
 
             res.status(403)
@@ -123,4 +128,81 @@ function checkToken (knex, req, res) {
     verify();
 }
 
-module.exports.checkToken = checkToken;
+function sendEmail (req, res)
+{
+    var body = req.body;
+
+    if (process.env.NODE_ENV != 'production')
+    {
+        process.env.MAILJET_PUBLIC = '524c051f4fb254ae5636592655d92194';
+        process.env.MAILJET_PRIVATE = '0b74bf7ddd333cad1d75c2dd2570cd7a';
+    }
+
+    var options = body['mailOptions'];
+    var accessToken = body['accessToken'];
+
+    var mailData = {
+        'Messages': [{
+            'From': {
+                'Email': 'nicholas.michael.ng@gmail.com',
+                'Name': 'Nicholas Ng'
+            },
+            'To': options.recipients,
+            'Subject': options.subject,
+            'TextPart': options.text,
+            'HtmlPart': options.html
+        }]   
+    };
+
+    var mailer = mailjet.connect(process.env.MAILJET_PUBLIC, process.env.MAILJET_PRIVATE);
+
+    var httpsOptions = {
+        hostname: 'www.googleapis.com',
+        port: 443,
+        path: '/oauth2/v1/tokeninfo?access_token=' + accessToken,
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' }
+    };
+
+    var httpsReq = https.request(httpsOptions, tokenCB);
+    httpsReq.on('error', function(err) {
+        console.log('problem with request: ' + err.message);
+    });
+    httpsReq.end();
+    
+    function tokenCB (cbRes)
+    {
+        cbRes.setEncoding('utf8');
+        cbRes.on('data', function (cbBody) {
+            if (JSON.parse(cbBody).hasOwnProperty('error'))
+            {
+                res.status(400)
+                    .set('Content-Type', 'text/plain')
+                    .send("Invalid Credentials")
+                    .end();
+                return;
+            }
+
+            var request = mailer.post('send', { 'version': 'v3.1' }).request(mailData);
+
+            request
+                .then(function (result) {
+                    console.log(result.body);
+                    res.status(200)
+                        .set('Content-Type', 'text/plain')
+                        .send("EMAIL SENT")
+                        .end();
+                })
+                .catch(function (err) {
+                    console.log(err);
+                    res.status(400)
+                        .set('Content-Type', 'text/plain')
+                        .send("ERROR ON SEND")
+                        .end();
+                });
+        });
+    }
+}
+
+module.exports.checkUserExists = checkUserExists;
+module.exports.sendEmail = sendEmail;

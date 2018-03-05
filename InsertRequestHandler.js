@@ -52,7 +52,6 @@ function insertDoctor (knex, req, res)
 {
 	var data = req.body;
 
-	/*
 	knex('faculty')
 		.where('name', data.name)
 		.catch((err) => { console.log(err); })
@@ -77,7 +76,6 @@ function insertDoctor (knex, req, res)
 					});
 			}
 		});
-	*/
 }
 
 function insertReading (knex, req, res)

@@ -4,7 +4,7 @@ var Knex = require('knex');
 
 var FetchRequestHandler = require('./FetchRequestHandler.js');
 var InsertRequestHandler = require('./InsertRequestHandler.js');
-var CheckTokenHandler = require('./CheckTokenHandler.js');
+var TokenHandler = require('./TokenHandler.js');
 
 var app = express();
 var multer = require('multer');
@@ -119,12 +119,18 @@ app.post('/insert/reading', function (req, res, next) {
         .end();
 });
 
-//CHECKS
+//TOKENS
 
 app.post('/check/token', jsonParser, function (req, res, next) {
     if(!req.is('application/json'))
         return next();
-    CheckTokenHandler.checkToken(knex, req, res);
+    TokenHandler.checkUserExists(knex, req, res);
+});
+
+app.post('/token/sendEmail', jsonParser, function (req, res, next) {
+    if (!req.is('application/json'))
+        return next();
+    TokenHandler.sendEmail(req, res);
 });
 
 const PORT = process.env.PORT || 8080;
