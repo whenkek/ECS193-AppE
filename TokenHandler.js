@@ -4,7 +4,6 @@ var Knex = require('knex');
 var mailjet = require('node-mailjet');
 var https = require('https');
 
-<<<<<<< HEAD:TokenHandler.js
 var CLIENT_IDS = [];
 if (process.env.NODE_ENV != 'production')
 {
@@ -19,51 +18,23 @@ function checkUserExists (knex, req, res)
 
     var body = req.body;
 
-=======
-function checkToken (knex, req, res) {
-    // console.log('Checking Token...');
-
-    var body = req.body;
-
-    var CLIENT_IDS = [];
-    if (process.env.NODE_ENV != 'production') // client id and token for development mode 
-    {
-        process.env.CLIENT_ID = '671445578517-ogrl80hb1pnq5ruirarvjsmvd8th2hjp.apps.googleusercontent.com';
-        process.env.CLIENT_ELEC_ID = '671445578517-ju2jvd1beiofp9qqddn3cn6ai1dehmru.apps.googleusercontent.com';
-    }
-    CLIENT_IDS = [process.env.CLIENT_ID, process.env.CLIENT_ELEC_ID];
-
->>>>>>> 9e420159cd60782919a8e350de2de834039c3387:CheckTokenHandler.js
     token = body['idToken'];
 
     const {OAuth2Client} = require('google-auth-library');
     const client = new OAuth2Client(process.env.CLIENT_ID);
 
-<<<<<<< HEAD:TokenHandler.js
-    async function verify() {
-        try 
-        {
-=======
     async function verify() {  // decalartion of anonymous function
         try {
->>>>>>> 9e420159cd60782919a8e350de2de834039c3387:CheckTokenHandler.js
             const ticket = await client.verifyIdToken({
                 idToken: token,
                 audience: CLIENT_IDS  // Specify the CLIENT_ID of the app that accesses the backend
                 // Or, if multiple clients access the backend:
                 //[CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3]
             });
-<<<<<<< HEAD:TokenHandler.js
-            const payload = ticket.getPayload();
-            //console.log(ticket);
-            //console.log(payload);
-            const userid = payload['sub'];
-=======
             const payload = ticket.getPayload(); //retrieves oauth2 verification
             // console.log(ticket);
             // console.log(payload);
             const userid = payload['sub']; 
->>>>>>> 9e420159cd60782919a8e350de2de834039c3387:CheckTokenHandler.js
             const email = payload['email'];
 
             if (email == null || userid == null) 
