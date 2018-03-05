@@ -1,7 +1,14 @@
 var process = require('process');
 var express = require('express');
 var Knex = require('knex');
-
+/** A list of all valid SQL fetching functions avalible on google app engine */
+/**
+*	This function processes the POST request and sends a POST to the SQL database to SELECT doctors from the appropriate table.
+*	After retrieveing the data, knex will send a call back returning a HTTP 200 status code and the data requested.
+* 	@param knex - connector between AppEngine and MySQL
+*	@param req  - the POST request
+*   @param res  - the POST response
+**/
 function fetchDoctors (knex, req, res)
 {
     knex
@@ -16,6 +23,13 @@ function fetchDoctors (knex, req, res)
         });
 }
 
+/**
+*	This function processes the POST request and sends a POST to the SQL database to SELECT the id WHERE the email matches the specified email in the request body.
+*	After retrieveing the data, knex will send a call back returning a HTTP 200 status code and the data requested.
+* 	@param knex - connector between AppEngine and MySQL
+*	@param req  - the POST request
+*   @param res  - the POST response
+**/
 function fetchIDfromEmail (knex, req, res)
 {
     var data = req.body;
@@ -36,6 +50,13 @@ function fetchIDfromEmail (knex, req, res)
         });
 }
 
+/**
+*	This function processes the POST request and sends a POST to the SQL database to SELECT patients WHERE the doctor column matches the one specified in the request body.
+*	After retrieveing the data, knex will send a call back returning a HTTP 200 status code and the data requested.
+* 	@param knex - connector between AppEngine and MySQL
+*	@param req  - the POST request
+*   @param res  - the POST response
+**/
 function fetchDoctorPatients (knex, req, res)
 {
     var data = req.body;
@@ -53,7 +74,14 @@ function fetchDoctorPatients (knex, req, res)
         });
 }
 
-function fetchReadings (knex, req, res, ids)
+/**
+*	This function processes the POST request and sends a POST to the SQL database to SELECT readings WHERE the id matches the one specified in the request body.
+*	After retrieveing the data, knex will send a call back returning a HTTP 200 status code and the data requested.
+* 	@param knex - connector between AppEngine and MySQL
+*	@param req  - the POST request
+*   @param res  - the POST response
+**/
+function fetchReadings (knex, req, res)
 {
     var data = req.body;
 
@@ -85,50 +113,14 @@ function fetchReadings (knex, req, res, ids)
         });
 }
 
-function fetchDoctorReadings (knex, req, res, ids)
-{
-    var data = req.body;
 
-    knex
-    .select()
-    .from('patients')
-    .where('doctor', data.doctor)
-    .then(function (results) {
-        var pats = 0;
-        var csv = '';
-        Array.prototype.forEach.call(results, function (row)
-        {
-            var id = row['id'];
-            knex
-                .select()
-                .from('patient_' + id)
-                .then(function (patResults) {
-                    var cnt = 0;
-                    Array.prototype.forEach.call(patResults, function (patRow)
-                    {
-                        var rowParse = id.toString();
-                        for (var key in patRow)
-                            rowParse += ',' + patRow[key];
-                        cnt++;
-                        if (cnt != patResults.length)
-                            rowParse += '\n';
-                        csv += rowParse;
-                    });
-                    pats++;
-                    if (pats == results.length)
-                    {
-                        res.status(200)
-                            .set('Content-Type', 'text/plain')
-                            .send(csv)
-                            .end();
-                    }
-                    else
-                        csv += '\n';
-                });
-        });
-    });
-}
-
+/**
+*	This function processes the POST request and sends a POST to the SQL database to SELECT readings WHERE the id matches the one specified in the request body.
+*	After retrieveing the data, knex will send a call back returning a HTTP 200 status code and the SIZE of the data requested.
+* 	@param knex - connector between AppEngine and MySQL
+*	@param req  - the POST request
+*   @param res  - the POST response
+**/
 function fetchReadingsSize (knex, req, res, ids)
 {
     var data = req.body;
