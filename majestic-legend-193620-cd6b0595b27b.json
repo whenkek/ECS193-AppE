@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "majestic-legend-193620",
+  "private_key_id": "cd6b0595b27b7c4f24a27ab76127619c3dca0371",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDNeDRymP2LpAIo\nuherwLBWFWNOiGloTHh0o+MPiAxdh5FAgngI5RUwv6ykCGCLBTAAv4IzY+B1+oW0\nJGYXhRd/MIFf/jwoWlvX5FVp2j+k3nLnbnJRpTs0SbrxYBg0E+bNlcwa/vMdVLXD\nAiFPpV8leEKFOTwU/5n28ttV/7yC4ko+vQaLPDVoSb2xVWlupEbbG7Re1QJJNv5E\nk0FDh/ZQPiWazEEjs2RPPZ+/0u6nl2jGVAUWiFHdyOPupP4yGY+PzB++g7fIAkO7\nk/qkA/eg8viEV5g5svUqqTZEG3vj/wtgvN18NHneMSIZ1OSAAhRaiIR974+DBc0e\nP110BykNAgMBAAECggEAQhYSkHViv4I964mHSYfNb7KrYTwA4zoNWD7KLlms2Hxd\nHKmaIApGmYpc5dmH6878VJFEOHE8ZdXxITK/33rARvl78zsbcEM33SWkz0oSRF4E\nCSn9/QKvGy9HwJEO19k62A8BOgGcgmeXmqRZwHtJMg0PIDh7eamIhOQx5eQ+Zr37\n8UGvKCJFrB4Q6TEvkGg+czDOrKReQUqAltHCYsm2zLtrmrZDCTD6aSYemySjT7mE\nktPuVRaTtAYxVsCRu9Cw9LGeS/61rd594XbTodLfLQr7YlXDYEwsUSsIgOcrM+yi\nJ9K8+ugmiHk7jLHdCZoT+Tfw8DQzmjU80i07gNd1RQKBgQD4T1trGpZg/SjhIil4\nBrtNEcj+2DlZm4diHdFUeCpFidRJ2ddz69SblcZjPjac+Y2v2gGv3hLTDrE8m1WS\ncJf07PCn9xj9tVRpsOpVXp3/RdTCXncx6J4BAygaKMEF6UTkdUuE0x5z6Mvn1B/V\nexj/pG2ggItWtNOZ0ZZ5TjpO7wKBgQDT1TOfOz3u9lXJx8DHxDBBVpaQS+yFKLpP\nnGyUwAu6+KRFUIu0JVlqMzX5Jeoc8ViyQF6b/O0i3ZgzqLzgQZR98gvmw0Nn7kRX\nQUTqYRH28rtMlnHfmyJUbx4urVA70R8AWr0oD7U5Vemz5B5uG3Ml5ILliuafcr9u\niWUp4dOHwwKBgQDeg/bPVucViSfeAAgbWCT2no542XkjNL2wjjntMTXoVOgZOg7a\nAabnueMrQjAcoYF36awDVsWVvx/SyPx5G08BHGdYjZUmnh1EDVchI4YAoSpU9+Rm\npCcbjyGbt5Op4W1sMTR4ldw/UImReUUBwKsZQ9c9spOrIqZQvEHU+OZFnwKBgFqm\nGMIiKt2wooOHrJKP/Qpo0GONafiNtjTNPpXlHN/0+O8EidQcS4grxAQLWoTqLseQ\nziu4b44E/9XTdogM6EuBIeCtXJIEH1CriJ83zOU9eDNNCgvjKiyxpFvbJMOEON0A\n94NGPYn8ntaxXuhFbOAhSnaKGyjOhOb7esQSdF/bAoGBAN8YR3KfCQrVhOz8S2cT\nOsChTzUxDKEZFPND3qSN+jG6SHoMeeJrh4yi/HQ+GdQ4JfbHpFsBsRWmLW2SaKft\nWxLva7K3eoCtEp4OG6dQmKZ5wUVS4cgTgzwKQ4XEKtTIHKvM7cFwnhtO+aKIgvgz\nQqi1Htw81DapegDA54UP/Zgd\n-----END PRIVATE KEY-----\n",
+  "client_email": "hugo-service@majestic-legend-193620.iam.gserviceaccount.com",
+  "client_id": "104084879713096412318",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/hugo-service%40majestic-legend-193620.iam.gserviceaccount.com"
+}

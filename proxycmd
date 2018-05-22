@@ -1,1 +1,1 @@
-./cloud_sql_proxy -instances=majestic-legend-193620:us-west1:test-database=tcp:3306
+./cloud_sql_proxy -instances=majestic-legend-193620:us-west1:test-database=tcp:3306 -credential_file majestic-legend-193620-cd6b0595b27b.json
